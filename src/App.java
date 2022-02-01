@@ -8,8 +8,11 @@ public class App {
         int numberOfDice = Integer.parseInt(args[0]);
         int players = Integer.parseInt(args[1]);
         int ais = Integer.parseInt(args[2]);
+
         Game.startServer(4000);
         Game game= new Game(numberOfDice, players, ais);
+        
         while (game.doTurn());
+        System.out.println("System shutting down...");
     }
 }
