@@ -67,6 +67,7 @@ public class GameSocket {
     }
 
     private String getData() throws IOException {
+        // TODO: should remove chars that are infront of "\b"
         return readerChannel.readLine().replace("\b", "");
     }
 
