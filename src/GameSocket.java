@@ -66,13 +66,26 @@ public class GameSocket {
         return result;
     }
 
-    private String getData() throws IOException {
-        // TODO: should remove chars that are infront of "\b"
-        return readerChannel.readLine().replace("\b", "");
-    }
-
     public void quit() throws IOException {
         socket.close();
     }
 
+    private String getData() throws IOException {
+        String str = readerChannel.readLine();
+        return removeBackstep(str);
+    }
+
+    private String removeBackstep(String str) throws IOException {
+        StringBuilder sb = new StringBuilder(str);
+        int index = str.indexOf('\b', 0);
+        while (index != -1) {
+            sb.deleteCharAt(index);
+            if (index != 0) {
+                sb.deleteCharAt(index - 1);
+            }
+            str = sb.toString();
+            index = str.indexOf('\b', 0);
+        }
+        return str;
+    }
 }
